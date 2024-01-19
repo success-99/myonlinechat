@@ -7,6 +7,7 @@ from .models import RoomMember
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseNotFound
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def lobby(request):
@@ -51,7 +52,7 @@ def getMember(request):
         member = RoomMember.objects.get(uid=uid, room_name=room_name)
         name = member.name
         return JsonResponse({'name': name}, safe=False)
-    except RoomMember.DoesNotExist:
+    except ObjectDoesNotExist:
         return HttpResponseNotFound('RoomMember topilmadi')
 
     # member = RoomMember.objects.get(
