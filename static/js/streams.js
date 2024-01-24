@@ -1,4 +1,3 @@
-
 const APP_ID = 'c5a6894fa2f94630af04737ee8d5febb'
 const TOKEN = sessionStorage.getItem('token')
 const CHANNEL = sessionStorage.getItem('room')
@@ -24,7 +23,7 @@ let joinAndDisplayLocalStream = async () => {
         console.error(error)
         window.open('/', '_self')
     }
-    
+
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
 
     let member = await createMember()
@@ -33,7 +32,7 @@ let joinAndDisplayLocalStream = async () => {
                      <div class="video-player" id="user-${UID}"></div>
                      <div class="username-wrapper"><span class="user-name">${member.name}</span></div>
                   </div>`
-    
+
     document.getElementById('video-streams').insertAdjacentHTML('beforeend', player)
     localTracks[1].play(`user-${UID}`)
     await client.publish([localTracks[0], localTracks[1]])
